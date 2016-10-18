@@ -1,8 +1,18 @@
 version: '2'
 services:
+  analyticsdb:
+    container_name: analyticsdb
+    build: 
+        context: .
+        dockerfile: database/Dockerfile
+    ports:
+     - "3306:3306"
+    environment:
+        MYSQL_ROOT_PASSWORD: root
   apim:
     container_name: apim
-    depends_on: 
+    depends_on:
+      - analyticsdb 
       - das
     build: 
         context: .
@@ -13,7 +23,9 @@ services:
      - "8280:8280"
      - "8243:8243"
   das:
-    container_name: das 
+    container_name: das
+    depends_on:
+      - analyticsdb
     build:
       context: .
       dockerfile: das/Dockerfile

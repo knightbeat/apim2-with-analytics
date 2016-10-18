@@ -9,6 +9,11 @@ RUN cd wso2/ && \
 
 COPY apim/api-manager.xml /wso2/wso2am-2.0.0/repository/conf/api-manager.xml
 
+COPY artifacts/api-import-export-2.0.0-v0.war /wso2/wso2am-2.0.0/repository/deployment/server/webapps/
+
+COPY artifacts/mysql-connector-java-5.1.34-bin.jar /wso2/wso2am-2.0.0/repository/components/lib
+
+COPY apim/master-datasources.xml /wso2/wso2am-2.0.0/repository/conf/datasources/
 
 CMD ["sh", "/wso2/wso2am-2.0.0/bin/wso2server.sh"]
 
